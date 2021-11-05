@@ -1,4 +1,4 @@
-package data.user
+package com.fourthwall.moviesapi.data.user
 
 import org.springframework.data.mongodb.repository.MongoRepository
 

@@ -1,6 +1,6 @@
 package com.fourthwall.moviesapi.service
 
-import data.user.User
+import com.fourthwall.moviesapi.data.user.User
 
 interface UserService {
 

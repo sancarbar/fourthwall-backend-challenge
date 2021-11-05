@@ -1,8 +1,8 @@
 package com.fourthwall.moviesapi.service
 
+import com.fourthwall.moviesapi.data.user.User
+import com.fourthwall.moviesapi.data.user.UserRepository
 import com.fourthwall.moviesapi.exception.UserWithEmailAlreadyRegisteredException
-import data.user.User
-import data.user.UserRepository
 import org.springframework.stereotype.Service
 
 @Service

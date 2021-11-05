@@ -1,4 +1,4 @@
-package data.user
+package com.fourthwall.moviesapi.data.user
 
 import com.fourthwall.moviesapi.controller.user.dto.UserRegistrationDto
 import org.springframework.data.annotation.Id
