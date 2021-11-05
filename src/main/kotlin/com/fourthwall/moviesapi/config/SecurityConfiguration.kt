@@ -26,6 +26,7 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
             .cors().and().csrf().disable()
             .addFilterBefore(jwtFilter, BasicAuthenticationFilter::class.java)
             .authorizeRequests()
+            .antMatchers(HttpMethod.POST, "/v1/user").permitAll()
             .antMatchers(HttpMethod.POST, "/v1/auth").permitAll()
             .antMatchers(HttpMethod.GET, "/health").permitAll()
             .anyRequest().authenticated()

@@ -1,6 +1,6 @@
 package data.user
 
-import com.fourthwall.moviesapi.controller.user.dto.UserDto
+import com.fourthwall.moviesapi.controller.user.dto.UserRegistrationDto
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.security.crypto.bcrypt.BCrypt
@@ -15,7 +15,7 @@ data class User(
     var passwordHash: String,
     val created: Date
 ) {
-    constructor(userDto: UserDto) :
+    constructor(userDto: UserRegistrationDto) :
             this(
                 null,
                 userDto.name,

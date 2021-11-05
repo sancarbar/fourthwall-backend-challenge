@@ -24,7 +24,6 @@ class JwtFilter(@Value("\${app.secret}") val secret: String) : OncePerRequestFil
         filterChain: FilterChain
     ) {
 
-
         if (HttpMethod.OPTIONS.name == request.method) {
             response.status = HttpServletResponse.SC_OK
             return filterChain.doFilter(request, response)
@@ -32,24 +31,27 @@ class JwtFilter(@Value("\${app.secret}") val secret: String) : OncePerRequestFil
             try {
 
                 val authHeader = request.getHeader(HttpHeaders.AUTHORIZATION)
-                val token = if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                val token = if (authHeader != null && authHeader.startsWith("Bearer "))
                     authHeader.substring(7)
-                } else return response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid token")
+                else
+                    null
 
-                val claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token)
-                val claimsBody = claims.body
-                val subject = claimsBody.subject
-                val rolesInBody = claims.body[CLAIMS_ROLES_KEY]
-                val roles = if (rolesInBody is List<*>) rolesInBody.filterIsInstance<String>() else null
+                if (token != null) {
+                    val claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token)
+                    val claimsBody = claims.body
+                    val subject = claimsBody.subject
+                    val rolesInBody = claims.body[CLAIMS_ROLES_KEY]
+                    val roles = if (rolesInBody is List<*>) rolesInBody.filterIsInstance<String>() else null
 
-                if (roles == null) {
-                    response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid token roles")
-                } else {
-                    SecurityContextHolder.getContext().authentication = TokenAuthentication(token, subject, roles)
+                    if (roles == null) {
+                        response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid token roles")
+                    } else {
+                        SecurityContextHolder.getContext().authentication = TokenAuthentication(token, subject, roles)
+                    }
+                    request.setAttribute("claims", claimsBody)
+                    request.setAttribute("jwtUserId", subject)
+                    request.setAttribute("jwtUserRoles", roles)
                 }
-                request.setAttribute("claims", claimsBody)
-                request.setAttribute("jwtUserId", subject)
-                request.setAttribute("jwtUserRoles", roles)
                 filterChain.doFilter(request, response)
             } catch (e: SignatureException) {
                 response.sendError(HttpStatus.UNAUTHORIZED.value(), "Invalid token")
