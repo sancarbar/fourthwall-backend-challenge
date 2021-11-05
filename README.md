@@ -9,4 +9,5 @@ In order to run this project you need to provide the following environment varia
 ```properties
     MONGODB_URI=mongodb+srv://admin:Ibpqe4S0vfbyo15w@cluster0.zbmvj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 SECRET=The-monkey-secret_2020
+OMDB_API_KEY=e4f33820
 ```

@@ -9,5 +9,6 @@ class MovieShowTimes(
     var id: String?,
     var imdbId: String,
     var name: String,
-    var showTimes: List<MovieShow>
+    var showTimes: List<MovieShow>,
+    var reviewsAvg: Int
 )

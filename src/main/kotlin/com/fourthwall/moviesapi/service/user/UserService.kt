@@ -1,4 +1,4 @@
-package com.fourthwall.moviesapi.service
+package com.fourthwall.moviesapi.service.user
 
 import com.fourthwall.moviesapi.data.user.User
 

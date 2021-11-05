@@ -2,7 +2,9 @@ package com.fourthwall.moviesapi.controller.auth
 
 import com.fourthwall.moviesapi.controller.auth.dto.LoginDto
 import com.fourthwall.moviesapi.controller.auth.dto.TokenDto
-import com.fourthwall.moviesapi.service.UserService
+import com.fourthwall.moviesapi.data.user.User
+import com.fourthwall.moviesapi.service.user.UserService
+import com.fourthwall.moviesapi.utils.CLAIMS_ROLES_KEY
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
@@ -36,20 +38,20 @@ class AuthController(val userService: UserService) {
         val user = userService.findByEmail(email)
 
         if (user != null && BCrypt.checkpw(loginDto.password, user.passwordHash)) {
-            return generateSessionToken(email)
+            return generateSessionToken(user)
         }
         throw  HttpServerErrorException(HttpStatus.UNAUTHORIZED)
     }
 
-    private fun generateSessionToken(email: String): TokenDto {
+    private fun generateSessionToken(user: User): TokenDto {
         val expiration = Calendar.getInstance()
         expiration.add(Calendar.MINUTE, 300)
-        val token = generateToken(email, expiration.time)
+        val token = generateToken(user, expiration.time)
         return TokenDto(token)
     }
 
-    private fun generateToken(email: String?, expirationDate: Date): String {
-        return Jwts.builder().setSubject(email).claim("role", "User")
+    private fun generateToken(user: User, expirationDate: Date): String {
+        return Jwts.builder().setSubject(user.email).claim(CLAIMS_ROLES_KEY, user.roles)
             .setIssuedAt(Date())
             .setExpiration(expirationDate)
             .signWith(SignatureAlgorithm.HS256, secret)
