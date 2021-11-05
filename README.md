@@ -11,3 +11,13 @@ In order to run this project you need to provide the following environment varia
 SECRET=The-monkey-secret_2020
 OMDB_API_KEY=e4f33820
 ```
+
+To run this project on your local environment run the following commnand:
+
+```shell
+  ./gradlew bootRun
+```
+
+Use the following POSTMAN collection to test and verify your API:
+
+https://www.getpostman.com/collections/0b7847b2c66e6f32be65
