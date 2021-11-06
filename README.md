@@ -6,16 +6,14 @@ Technologies used: Kotlin + Spring Boot
 
 In order to run this project you need to provide the following environment variables:
 
-```properties
-MONGODB_URI=mongodb+srv://admin:Ibpqe4S0vfbyo15w@cluster0.zbmvj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-SECRET=The-monkey-secret_2020
-OMDB_API_KEY=e4f33820
-```
+* MONGODB_URI
+* SECRET
+* OMDB_API_KEY
 
-To run this project on your local environment run the following commnand:
+To run this project on your local environment use the following command:
 
 ```shell
-  ./gradlew bootRun
+  ./gradlew bootRun --args='--app.secret=This-is-the-less-secret-secret2020 --spring.data.mongodb.uri=mongodb+srv://admin:Ibpqe4S0vfbyo15w@cluster0.zbmvj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority --app.omdb_api_key=e4f33820'
 ```
 
 Run unit tests:
