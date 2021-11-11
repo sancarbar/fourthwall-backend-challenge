@@ -10,7 +10,7 @@ Use the following credentials to access the Cinema Owner endpoint to modify movi
 ```json
 {"email":"santiago@mail.com", "password":"passw0rd"}
 ```
-Use the following credentials to only be able to view the movie times and movie information:
+Use the following credentials to only be able to view the movie times and movie's information:
 ```json
 {"email":"andres@mail.com", "password":"passw0rd"}
 ```
