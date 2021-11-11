@@ -4,6 +4,17 @@ of [Fourthwall Backend Coding Challenge](https://gist.github.com/wbaumann/aaa5ef
 
 Technologies used: Kotlin + Spring Boot
 
+The REST API was secured using JWT.
+
+Use the following credentials to access the Cinema Owner endpoint to modify movie times:
+```json
+{"email":"santiago@mail.com", "password":"passw0rd"}
+```
+Use the following credentials to only be able to view the movie times and movie information:
+```json
+{"email":"andres@mail.com", "password":"passw0rd"}
+```
+
 In order to run this project you need to provide the following environment variables:
 
 * MONGODB_URI
