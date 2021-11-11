@@ -33,6 +33,6 @@ Run unit tests:
   ./gradlew test
 ```
 
-Use the following POSTMAN collection to test and verify your API:
+Use the following POSTMAN collection to test and verify the API:
 
 https://www.getpostman.com/collections/0b7847b2c66e6f32be65
